@@ -1,0 +1,53 @@
+syntax = "proto3";
+
+package student;
+
+option go_package = "studentpb";
+
+message Student {
+    string id = 1;
+    string first_name = 2;
+    string last_name = 3;
+    string department = 4;
+    int32 course = 5;
+    string address = 6;
+    string email = 7;
+
+}
+message CreateStudentRequest{
+    Student student =1;
+}
+message CreateStudentResponse{
+    Student student =1; // will have a student_id
+} 
+message ReadStudentRequest{
+    string student_id=1;
+}
+message ReadStudentResponse{
+    Student student =1;
+}
+message UpdateStudentRequest{
+    Student student =1;
+}
+message UpdateStudentResponse{
+    Student student = 1;
+}
+message DeleteStudentRequest{
+    string student_id = 1;
+}
+message DeleteStudentResponse{
+    string student_id =1;
+}
+message ListStudentRequest{
+
+}
+message ListStudentResponse{
+    Student student =1;
+}
+service StudentService{
+    rpc CreateStudent (CreateStudentRequest) returns (CreateStudentResponse);
+    rpc ReadStudent (ReadStudentRequest) returns (ReadStudentResponse);
+    rpc UpdateStudent (UpdateStudentRequest) returns (UpdateStudentResponse);
+    rpc DeleteStudent (DeleteStudentRequest) returns (DeleteStudentResponse);
+    rpc ListStudent (ListStudentRequest) returns (stream ListStudentResponse);
+}
